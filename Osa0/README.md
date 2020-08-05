@@ -7,6 +7,7 @@ Selain lähettää uuden noten palvelimelle ja palvelin antaa redirectaus ohjeen
 selainta lähettämään uuden HTTP GET-pyynnön /notes :lle.  
 end note
 
+selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
 palvelin-->selain: HTML koodi
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
 palvelin-->selain: Main.css
