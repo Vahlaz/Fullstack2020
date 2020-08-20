@@ -18,7 +18,6 @@ personService
 })
 },[])
 
-
 useEffect(()=> {
   setNewSearch(persons)
 },[persons])
