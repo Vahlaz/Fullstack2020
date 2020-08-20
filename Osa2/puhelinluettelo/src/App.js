@@ -64,14 +64,17 @@ const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setN
 
 return(
   <form onSubmit={addName}>
-  <div> name: <input 
+  <div> name:
+    <input 
     value = {newName} 
-    onChange={handleNameChange}/> </div>
-    
-    <div> Number: <input 
+    onChange={handleNameChange}/> 
+    </div>
+    <div> 
+      Number: 
+      <input 
       value = {newNumber}
-      onChange = {handleNumberChange} /> </div>
-   
+      onChange = {handleNumberChange}/>
+      </div>
     <div>
     <button type="submit">add</button>
   </div>
