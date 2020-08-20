@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Content = ({ persons }) => {
   const map1 = persons.map(parts =>( 
@@ -37,24 +38,20 @@ const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setN
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked')
-
     const newPersonObject = {
       name: newName,
       number: newNumber
     }
     const found = persons.findIndex(element => element.name === newName)
     console.log(found)
-  
+
     if (found >= 0 )  {
       window.alert(`${newName} is already added to phonebook`)
-    }
-
-     else if (found === -1){
+    }else if (found === -1){
     setPersons(persons.concat(newPersonObject))
     setNewName('')
     setNewNumber('')
     console.log(persons)
-  
     }
   }
 
@@ -78,22 +75,24 @@ return(
     <div>
     <button type="submit">add</button>
   </div>
-</form>
-)
-
+  </form>
+  )
 }
 
-
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' }
-  ])
+  const [persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState([])
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
 
 useEffect(()=> {
   setNewSearch(persons)
@@ -106,8 +105,7 @@ useEffect(()=> {
       <h2>Add a new</h2>
       <NewPersonForm persons = {persons} setPersons={setPersons} newName = {newName} setNewName={setNewName} newNumber = {newNumber} setNewNumber = {setNewNumber}  />
       <h2>Numbers</h2>
-    <Content  persons = {
-            newSearch}/>
+      <Content  persons = {newSearch}/>
     </div>
   )
 }
