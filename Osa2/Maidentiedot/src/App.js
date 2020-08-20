@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
   
-const Weather = ({capital}) =>{
+const ShowWeather = ({capital}) =>{
 const [weather, setWeather] = useState([]) 
 useEffect(() => {
   const params = {
@@ -29,7 +29,7 @@ return(
   )
 }
 
-const Country = ({countries}) =>{
+const SingleCountry = ({countries}) =>{
 return (
   <>
   <div> <h1>{countries[0].name}</h1> </div> 
@@ -43,7 +43,7 @@ return (
   </div>
   <div> <img src={countries[0].flag } alt="flag" width="200"/>  </div> 
   <div> 
-  <Weather capital = {countries[0].capital}/>
+  <ShowWeather capital = {countries[0].capital}/>
   </div>
   </>
   )
@@ -72,7 +72,7 @@ if ( showAll.length === 0){
 else if(showAll.length === 1){
   map1 = 
   <> 
-  <Country countries = {showAll}/>
+  <SingleCountry countries = {showAll}/>
   </>
 }
 
