@@ -1,7 +1,9 @@
 import React from 'react'
 import personService from './persons'
 
-const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setNewNumber}) =>{
+
+
+const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setNewNumber, setMessage ,setErrorMessage}) =>{
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked')
@@ -15,8 +17,20 @@ const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setN
       if(window.confirm(`${newName} is already added to the phonebook, replace the old number with new one?`)){
         changedPerson.number = newNumber
         console.log(changedPerson)
-        personService.replaceNumber({changedPerson})
+        personService.replaceNumber({changedPerson}).then(
         setPersons(persons.map(person => person.id!==changedPerson.id ? person : changedPerson))
+        )
+        .catch(
+          error => {
+            setErrorMessage(`${newName} has already been removed from the server`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 3000)
+
+          }
+        )
+        setNewName('')
+        setNewNumber('')
       }
     }else{
     personService.postPersons({newPersonObject})
@@ -26,6 +40,10 @@ const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setN
       setNewName('')
       setNewNumber('')
       console.log(persons)})
+      setMessage(`added ${newName}`)
+      setTimeout(()=> {
+        setMessage(null)
+      },3000 )
     }
   }
 
