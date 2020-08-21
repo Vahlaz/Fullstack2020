@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+<<<<<<< HEAD
 import axios from 'axios'
 
 const Content = ({ persons }) => {
@@ -81,21 +82,26 @@ return(
   </form>
   )
 }
+=======
+import NewPersonForm from './components/NewPersonForm'
+import Filter from './components/Filter'
+import Content from './components/Content'
+import personService from './components/persons'
+>>>>>>> 246774c9868387f62cc4ca9d7ae554ea728563ab
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState([])
 
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
-  }, [])
+useEffect(() =>{
+personService
+.getAll()
+.then(response =>{ 
+  setPersons(response.data)
+})
+},[])
 
 useEffect(()=> {
   setNewSearch(persons)
@@ -108,7 +114,7 @@ useEffect(()=> {
       <h2>Add a new</h2>
       <NewPersonForm persons = {persons} setPersons={setPersons} newName = {newName} setNewName={setNewName} newNumber = {newNumber} setNewNumber = {setNewNumber}  />
       <h2>Numbers</h2>
-      <Content  persons = {newSearch}/>
+      <Content  persons = {newSearch} setPersons = {setPersons} setNewSearch = {setNewSearch} />
     </div>
   )
 }
