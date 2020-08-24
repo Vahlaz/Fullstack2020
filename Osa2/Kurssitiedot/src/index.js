@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Courses from './components/courses';
@@ -29,26 +28,29 @@ const Content = ({ course }) => {
   )
 }
 
-const Course = (props) => {
-  console.log(props.courses.parts)
-  return ( 
-    <div>
-    <Header course = {props.courses} />
-    <Content course = {props.courses} />
-    <Total course = {props.courses}/>
+const Course = ({courses}) => {
+  console.log(courses)
+  const course = courses.map(course => 
+    <div key = {course.id}>
+    <Header course = {course}/> 
+    <Content course = {course}/>
+    <Total course = {course}/>
     </div>
+  )
+  return ( 
+    <>
+      {course}
+    </>
   )
 }
 
 const App = ({courses}) => {
+  console.log(courses)
   return (
-    <div>
-      <Header course={courses[0]}/>
-      <Course courses={courses[1]}/>
-      <Course courses={courses[2]}/>
-      <Course courses={courses[3]}/>
-    </div>
+    <>
+      <Course courses={courses}/>
+    </>
   )
 }
 
-ReactDOM.render(<App courses = {courses} />, document.getElementById('root'))
+ReactDOM.render(<App courses = {Courses} />, document.getElementById('root'))
