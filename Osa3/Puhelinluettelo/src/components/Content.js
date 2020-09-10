@@ -18,11 +18,9 @@ const RemoveButton = ({person, setPersons, persons}) => {
 }
 
 const Content = ({ persons , setPersons}) => {
-  console.log(persons)
   const map1 = persons.map(person =>
   <li key = {person.id}>
     {person.name} {person.number} <RemoveButton person = {person} setPersons = {setPersons} persons = {persons}/>
-    {console.log(person)}
   </li>
   )
   return (

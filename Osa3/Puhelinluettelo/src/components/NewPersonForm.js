@@ -42,6 +42,7 @@ const NewPersonForm = ({persons, setPersons,newName, setNewName, newNumber, setN
       console.log(persons)
     console.log(response)
     })
+    .catch((error) => console.log('error : ', error.message))
 
       setMessage(`added ${newName}`)
       setTimeout(()=> {
