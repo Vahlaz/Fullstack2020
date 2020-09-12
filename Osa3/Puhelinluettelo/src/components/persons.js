@@ -2,21 +2,20 @@
 import axios from'axios'
 
 const getAll = () => {
-    console.log(axios.get('http://localhost:3001/api/persons'))
-    return axios.get('http://localhost:3001/api/persons')
+    console.log(axios.get('https://immense-harbor-69467.herokuapp.com/api/persons'))
+    return axios.get('https://immense-harbor-69467.herokuapp.com/api/persons')
 }
 
 const removePerson = (id) => {
-    axios.delete(`http://localhost:3001/api/persons/${id}`)
+    axios.delete(`https://immense-harbor-69467.herokuapp.com/api/persons/${id}`)
 }
 
 const postPersons = ({newPersonObject}) => {
-    console.log(axios.post('http://localhost:3001/api/persons', newPersonObject))
-    return(axios.post('http://localhost:3001/api/persons', newPersonObject))
+    return(axios.post('https://immense-harbor-69467.herokuapp.com/api/persons', newPersonObject))
 }
 
 const replaceNumber = ({changedPerson}) =>{
-    return axios.put(`http://localhost:3001/api/persons/${changedPerson.id}` , changedPerson)
+    return axios.put(`https://immense-harbor-69467.herokuapp.com/api/persons/${changedPerson.id}` , changedPerson)
 }
 
 export default {
