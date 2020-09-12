@@ -11,7 +11,7 @@ const removePerson = (id) => {
 }
 
 const postPersons = ({newPersonObject}) => {
-    
+    console.log(axios.post('http://localhost:3001/api/persons', newPersonObject))
     return(axios.post('http://localhost:3001/api/persons', newPersonObject))
 }
 
