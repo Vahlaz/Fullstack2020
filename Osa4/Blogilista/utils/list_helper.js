@@ -1,3 +1,5 @@
+const lodash = require('lodash')    
+    
     const dummy=(blogs)=>{
         return 1
     }
@@ -25,11 +27,25 @@
     }
 
     const mostBlogs = (blogs) => {
-        blogs.map()
+        const allBlogs = []
+        if(blogs.length >= 1){
+            blogs.forEach(blog =>{
+                newAuthorObject = {
+                    author: blog.author,
+                    blogs: blogs.filter(ihaok => ihaok.author === blog.author).length 
+                }
+                allBlogs.push(newAuthorObject)
+                })
+            const result = allBlogs.sort((a,b)=>b.blogs - a.blogs)
+            console.log(result)
+            return result[0]
+                
+        }else return 0
     }
 
     module.exports = {
         dummy,
         likes,
-        favoriteBlog
+        favoriteBlog,
+        mostBlogs
     }
