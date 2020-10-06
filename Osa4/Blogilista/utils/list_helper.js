@@ -36,10 +36,27 @@ const lodash = require('lodash')
                 }
                 allBlogs.push(newAuthorObject)
                 })
-            const result = allBlogs.sort((a,b)=>b.blogs - a.blogs)
+            const result = allBlogs.sort((a,b)=>b.blogs - a.blogs)[0]
             console.log(result)
-            return result[0]
-                
+            return result
+        }else return 0
+    }
+
+    const mostLikes = (blogs) => {
+        const allBlogs = []
+        const reducer = (accumulator , blog)=> accumulator + blog
+        if(blogs.length >= 1){
+            blogs.forEach(blog =>{
+                newAuthorObject =
+                {
+                    author: blog.author,
+                    likes: blogs.filter(ihaok => ihaok.author === blog.author).map(blog => blog.likes).reduce(reducer)
+                }
+                allBlogs.push(newAuthorObject)
+                })
+            const result = allBlogs.sort((a,b)=>b.likes - a.likes)[0]
+            console.log(result)
+            return result
         }else return 0
     }
 
@@ -47,5 +64,6 @@ const lodash = require('lodash')
         dummy,
         likes,
         favoriteBlog,
-        mostBlogs
+        mostBlogs,
+        mostLikes
     }
