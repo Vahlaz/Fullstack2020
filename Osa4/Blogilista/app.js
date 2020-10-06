@@ -5,11 +5,12 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const blogsRouter = require('./controllers/blogs')
+app.use(cors())
+app.use(express.json())
+
 app.use('/api', blogsRouter)
 
 
-app.use(cors())
-app.use(express.json())
 
 const mongoUrl = process.env.MONGODB_URI
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
