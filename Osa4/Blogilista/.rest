@@ -1,11 +1,10 @@
 //GET http://localhost:3001/api/blogs/
 
-POST http://localhost:3001/api/blogs/
+POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-  "title": "ihaok",
-  "author": "mutootko",
-  "url": "kattonu",
-  "likes": 77
+  "username": "ihaokmut",
+  "name":"ootko",
+  "password": "kattonu"
 }
