@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import loginService from '../services/loginService'
-const Loginform =({user, setUser})=> {
+import blogService from '../services/blogs'
+const Loginform =({setUser})=> {
     const [username, setUsername] = useState([])
     const [password, setPassword] = useState([])
 
@@ -8,20 +9,17 @@ const Loginform =({user, setUser})=> {
         event.preventDefault()
         console.log('trying to log in with', username , 'and ', password)
         try {
-            const user = await loginService.login({
+            const bruh = await loginService.login({
               username, password,
             })
-            window.localStorage.setItem('LoggedBlogAppUser', JSON.stringify(user))
-            setUser(user)
+            window.localStorage.setItem('LoggedBlogAppUser', JSON.stringify(bruh))
+            blogService.setToken(bruh.token)
             setUsername('')
             setPassword('')
-            console.log(user)
+            setUser(bruh)
           } catch {
               console.log('bruh')
           }
-          
-              
-          
     }
 
 return (
@@ -49,10 +47,7 @@ return (
             <button type="submit">login</button>
         </form>
     </div>
-
-
-)
-    
+    )
 }
 
 export default Loginform
