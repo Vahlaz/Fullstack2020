@@ -31,10 +31,13 @@ blogsRouter.post('/blogs', async (request, response) => {
         likes:body.likes,
         user: user._id
       })
+      
       await blog.save()
       user.blogs = user.blogs.concat(blog._id)
       await user.save()
       response.status(201).json(blog)
+
+    
     }else{
       const blog = new Blog({
         title:body.title,
@@ -43,13 +46,14 @@ blogsRouter.post('/blogs', async (request, response) => {
         likes:0,
         user: user._id
       })
+
       await blog.save()
       response.status(201).json(blog)
       user.blogs = user.blogs.concat(blog._id)
       await user.save()
     }
   }else{
-    response.status(400).end()
+    response.status(400).json({error:"velitilanne"})
   }
 })
 
