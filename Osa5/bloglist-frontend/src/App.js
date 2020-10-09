@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Blog from './components/Blog'
+import Blogs from './components/Blog'
 import blogService from './services/blogs'
 import Loginform from './components/loginform'
 import LogOutButton from './components/logOutButton'
 import BlogForm from './components/createBlog'
 import Notification from './components/Notification'
-
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -44,10 +43,8 @@ if(user === null){
       <Notification.Message message = {message}/>
       <Notification.Notification message = {error}/>
       {user.name} logged in <LogOutButton setUser = {setUser}/>
-      <BlogForm setMessage = {setMessage} setError = {setError}/>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      <BlogForm setMessage = {setMessage} setError = {setError} blogs = {blogs} setBlogs = {setBlogs}/>
+      <Blogs blogs={blogs} />
     </div>
   )
 }

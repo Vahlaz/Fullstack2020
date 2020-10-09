@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import blogService from "../services/blogs";
 
-const NewBlogForm = ({ setMessage, setError }) => {
+const NewBlogForm = ({ setMessage, setError, blogs, setBlogs }) => {
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [formVisible, setFormVisible] = useState(false)
+
+  const hideWhenVisible = { display: formVisible ? 'none' : '' }
+  const showWhenVisible = { display: formVisible ? '' : 'none' }
 
   const createHandler = async (event) => {
     event.preventDefault();
@@ -18,10 +22,13 @@ const NewBlogForm = ({ setMessage, setError }) => {
       setAuthor("");
       setTitle("");
       setUrl("");
+      setBlogs(await blogService.getAll())
+
       setMessage(`a new blog ${title} by ${author} was added`);
       setTimeout(() => {
         setMessage(null);
       }, 5000);
+      setFormVisible(false)
     } catch {
         setAuthor("");
         setTitle("");
@@ -35,10 +42,14 @@ const NewBlogForm = ({ setMessage, setError }) => {
 
   return (
     <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setFormVisible(true)}>Add new blog</button>
+        </div>
       <h2>create new</h2>
+      <div style={showWhenVisible}>
       <form onSubmit={createHandler}>
         <div>
-          title:
+          title: 
           <input
             type="text"
             value={title}
@@ -47,7 +58,7 @@ const NewBlogForm = ({ setMessage, setError }) => {
           />
         </div>
         <div>
-          author:
+          author: 
           <input
             type="text"
             value={author}
@@ -56,7 +67,7 @@ const NewBlogForm = ({ setMessage, setError }) => {
           />
         </div>
         <div>
-          url:
+          url: 
           <input
             type="text"
             value={url}
@@ -66,6 +77,8 @@ const NewBlogForm = ({ setMessage, setError }) => {
         </div>
         <button type="submit">post</button>
       </form>
+      <button onClick={() => setFormVisible(false)}>cancel</button>
+      </div>
     </div>
   );
 };
