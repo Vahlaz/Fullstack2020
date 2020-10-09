@@ -44,7 +44,7 @@ if(user === null){
       <Notification.Notification message = {error}/>
       {user.name} logged in <LogOutButton setUser = {setUser}/>
       <BlogForm setMessage = {setMessage} setError = {setError} blogs = {blogs} setBlogs = {setBlogs}/>
-      <Blogs blogs={blogs} />
+      <Blogs blogs={blogs} user = {user} setBlogs = {setBlogs} />
     </div>
   )
 }

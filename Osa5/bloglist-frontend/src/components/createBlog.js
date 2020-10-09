@@ -42,9 +42,7 @@ const NewBlogForm = ({ setMessage, setError, blogs, setBlogs }) => {
 
   return (
     <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setFormVisible(true)}>Add new blog</button>
-        </div>
+
       <h2>create new</h2>
       <div style={showWhenVisible}>
       <form onSubmit={createHandler}>
@@ -79,6 +77,9 @@ const NewBlogForm = ({ setMessage, setError, blogs, setBlogs }) => {
       </form>
       <button onClick={() => setFormVisible(false)}>cancel</button>
       </div>
+      <div style={hideWhenVisible}>
+          <button onClick={() => setFormVisible(true)}>Add new blog</button>
+        </div>
     </div>
   );
 };

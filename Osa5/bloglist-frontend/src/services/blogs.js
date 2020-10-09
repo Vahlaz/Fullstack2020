@@ -14,10 +14,25 @@ const create = async blog => {
   return response.data
 }
 
+const remove = async id => {
+  const config = {
+    headers: {Authorization: token},
+  } 
+  const response = await axios.delete(`/api/blogs/${id}`, config)
+  return response
+}
+
 let token = null
 
 const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-export default { getAll, setToken , token, create }
+const edit = async ({blog}) => {
+  console.log('here')
+  console.log( blog)
+  const response = await axios.put(`/api/blogs/${blog.id}`, blog)
+  return response
+}
+
+export default { getAll, setToken , token, create, remove, edit }

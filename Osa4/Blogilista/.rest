@@ -32,3 +32,9 @@ Content-Type: application/json
   "username":"lisa",
   "password":"margepoika"
 }
+
+###
+PUT http://localhost:3001/api/blogs/5f7d7e3003c23829cc900c83
+Content-Type: application/json
+
+{"title":"bruh","author":"mutootko","url":"kattonu","likes":31,"user":"5f7d6a5597497e206c0a67a2","id":"5f7d7e3003c23829cc900c83"}

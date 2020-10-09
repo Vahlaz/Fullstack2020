@@ -80,15 +80,8 @@ blogsRouter.delete('/blogs/:id', async (request, response)=> {
 })
 
 blogsRouter.put('/blogs/:id', async (request, response)=> {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
-  if (!request.token || !decodedToken.id) {
-    return response.status(401).json({ error: 'token missing or invalid' })
-  }
-    const user = await User.findById(decodedToken.id)
-  if(blog.user.toString() === user.toString() ) {
     await Blog.findByIdAndUpdate(request.params.id, request.body)
     response.status(204).json(request.body)
-  }
+  })
 
-})
   module.exports = blogsRouter
