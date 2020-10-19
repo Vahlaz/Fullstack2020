@@ -28,7 +28,7 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-const edit = async ({blog}) => {
+const edit = async (blog) => {
   console.log('here')
   console.log( blog)
   const response = await axios.put(`/api/blogs/${blog.id}`, blog)

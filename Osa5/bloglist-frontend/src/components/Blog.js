@@ -34,10 +34,10 @@ const SingleBlog = ({blog, blogs, user, setBlogs}) => {
     </div>
     <div style = {showWhenVisible}>
       <div>
-        {`${blog.title}
-        ${blog.author}
-        ${blog.url}
-        ${blog.likes}`} <Button.LikeButton blog = {blog} blogs ={blogs} setBlogs = {setBlogs}/>
+        {`Title: ${blog.title}`}<br/>
+        {`Author: ${blog.author}`}<br/>
+        {`url: ${blog.url}`}<br/>
+        {`likes: ${blog.likes}  `} <Button.LikeButton blog = {blog} blogs ={blogs} setBlogs = {setBlogs}/>
       </div>
       <button onClick = {()=> setBlogVisible(false)}>hide</button>
       <RemoveButton blog = {blog} blogs = {blogs} user = {user} setBlogs = {setBlogs} />
