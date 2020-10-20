@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import blogService from "../services/blogs";
 
+
 const NewBlogForm = ({ setMessage, setError, blogs, setBlogs }) => {
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
