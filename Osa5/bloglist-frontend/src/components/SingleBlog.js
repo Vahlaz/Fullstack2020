@@ -28,13 +28,13 @@ const SingleBlog = ({blog, blogs, user, setBlogs}) => {
     const showWhenVisible = { display: blogVisible ? '' : 'none' }
     return(
     <>
-      <div style={hideWhenVisible}>
+      <div style={hideWhenVisible} className = 'togglable'>
         <div key={blog.id}>
         {blog.title} {blog.author}
         </div>
         <button onClick={() => setBlogVisible(true)}>show</button>
       </div>
-      <div style = {showWhenVisible}>
+      <div style = {showWhenVisible} className = 'togglable'>
         <div>
           {`Title: ${blog.title}`}<br/>
           {`Author: ${blog.author}`}<br/>
