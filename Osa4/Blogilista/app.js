@@ -1,4 +1,4 @@
-require('dotenv').config()
+const config = require('./utils/config')
 const http = require('http')
 const express = require('express')
 const app = express()
@@ -16,8 +16,13 @@ app.use('/api', blogsRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 
-const mongoUrl = process.env.MONGODB_URI
+if(process.env.NODE_ENV ==='test'){
+    const testingRouter = require('./controllers/testingRouter')
+    app.use('/api/testing', testingRouter)
+}
+console.log(config.MONGODB_URI)
+const mongoUrl = config.MONGODB_URI
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 
-module.exports=app
+module.exports=app  

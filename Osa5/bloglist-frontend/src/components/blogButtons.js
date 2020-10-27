@@ -39,7 +39,7 @@ const LikeButton = ({ blog, blogs, setBlogs, bruh }) => {
 			)
 		}
 	}
-	return <button onClick={handleClick}>like</button>
+	return <button onClick={handleClick} id='like-button'>like</button>
 }
 
 export default { LikeButton, RemoveButton }

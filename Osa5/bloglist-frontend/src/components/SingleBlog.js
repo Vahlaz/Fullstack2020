@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Button from './blogButtons'
 
+
+
 const SingleBlog = ({ blog, blogs, user, setBlogs }) => {
 	const [blogVisible, setBlogVisible] = useState(false)
 	const hideWhenVisible = { display: blogVisible ? 'none' : '' }
@@ -11,7 +13,7 @@ const SingleBlog = ({ blog, blogs, user, setBlogs }) => {
 				<div key={blog.id}>
 					{blog.title} {blog.author}
 				</div>
-				<button onClick={() => setBlogVisible(true)}>show</button>
+				<button onClick={() => setBlogVisible(true)} id='show-button'>show</button>
 			</div>
 			<div style={showWhenVisible} className='bruh'>
 				<div>
@@ -20,8 +22,9 @@ const SingleBlog = ({ blog, blogs, user, setBlogs }) => {
 					{`Author: ${blog.author}`}
 					<br />
 					{`url: ${blog.url}`}
-					<br />
-					{`likes: ${blog.likes}  `}{' '}
+					<div className='likes'>
+					{`likes: ${blog.likes}`}{' '}
+					</div>
 					<Button.LikeButton blog={blog} blogs={blogs} setBlogs={setBlogs} />
 				</div>
 				<button onClick={() => setBlogVisible(false)}>hide</button>

@@ -79,12 +79,12 @@ const NewBlogForm = ({ setMessage, setError, blogs, setBlogs, test }) => {
 							onChange={({ target }) => setUrl(target.value)}
 						/>
 					</div>
-					<button type='submit'>post</button>
+					<button type='submit' id='submit-button'>post</button>
 				</form>
-				<button onClick={() => setFormVisible(false)}>cancel</button>
+				<button onClick={() => setFormVisible(false)} >cancel</button>
 			</div>
 			<div style={hideWhenVisible}>
-				<button onClick={() => setFormVisible(true)}>Add new blog</button>
+				<button onClick={() => setFormVisible(true)} id ='Add-button'>Add new blog</button>
 			</div>
 		</div>
 	)

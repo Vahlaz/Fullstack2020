@@ -9,7 +9,7 @@ const Blogs = ({ blogs, user, setBlogs }) => {
 		borderWidth: 1,
 		marginBottom: 5,
 	}
-
+blogs = blogs.sort((a,b) => b.likes - a.likes)
 	return (
 		<div>
 			{blogs.map((blog) => (
