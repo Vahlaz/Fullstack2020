@@ -1,11 +1,5 @@
-const anecdotesAtStart = [
-	'If it hurts, do it more often',
-	'Adding manpower to a late software project makes it later!',
-	'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-	'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-	'Premature optimization is the root of all evil.',
-	'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-]
+import anecdoteservice from '../services/anecdoteservice'
+const anecdotesAtStart = []
 
 const getId = () => (100000 * Math.random()).toFixed(0)
 
@@ -19,25 +13,38 @@ const asObject = (anecdote) => {
 
 export const vote = (id) => {
 	console.log('voted')
-	return {
-		type: 'VOTE',
-		data: id,
+	return async (dispatch) => {
+		await anecdoteservice.vote(id)
+		dispatch({
+			type: 'VOTE',
+			data: id,
+		})
 	}
 }
 
 export const new_anecdote = (content) => {
-	console.log(content)
-	return {
-		type: 'NEW_ANECDOTE',
-		data: content,
+	return async (dispatch) => {
+		const newAnecdote = await anecdoteservice.createNew(content)
+		dispatch({
+			type: 'NEW_ANECDOTE',
+			data: newAnecdote.content,
+		})
+	}
+}
+
+export const initializeAnecdotes = () => {
+	return async (dispatch) => {
+		const anecdotes = await anecdoteservice.getAll()
+		dispatch({
+			type: 'INIT_ANEC',
+			data: anecdotes,
+		})
 	}
 }
 
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
-	console.log('state now: ', state)
-	console.log('action', action)
 	switch (action.type) {
 		case 'VOTE':
 			const changedstate = state.map((anecdote) =>
@@ -50,6 +57,8 @@ const reducer = (state = initialState, action) => {
 			const newAnecdote = asObject(action.data)
 			const newAnecdotes = state.concat(newAnecdote)
 			return newAnecdotes
+		case 'INIT_ANEC':
+			return action.data
 		default:
 			return state
 	}
