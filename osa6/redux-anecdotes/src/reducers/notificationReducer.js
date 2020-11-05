@@ -4,6 +4,7 @@ export const notification = (notification, time) => {
 			type: 'NOTIFICATION',
 			data: notification,
 		})
+		
 		setTimeout(
 			() =>
 				dispatch({
