@@ -1,0 +1,42 @@
+GET http://localhost:3001/api/blogs/
+###
+
+DELETE http://localhost:3001/api/blogs/5f7d821d6a3a300aa069bbdd
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxpc2EiLCJpZCI6IjVmN2Q4MTFhNmEzYTMwMGFhMDY5YmJkYyIsImlhdCI6MTYwMjE0NTE4MX0.lutQauDvnljJVUJJSSi3gAVy22pxhKki9DrNUA_teMM
+###
+
+POST http://localhost:3001/api/users/
+Content-Type: application/json
+
+{
+  "username":"ihaok",
+  "name": "mutootko",
+  "password": "homerpoika"
+}
+
+###
+
+POST http://localhost:3001/api/blogs/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImloYW9rIiwiaWQiOiI1Zjk2YjVlNTU5YjkxZjM0MjRlMTc1NTkiLCJpYXQiOjE2MDM3MTI1MTZ9.jZcFnDSAUfQn-sPq-aLzAu2BncZcj_bWw66MnZoyWv0
+
+ {"title": "First class tests", "author": "Robert C. Martin", "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll", "likes": "10", "userId": "5f7d80cc6a3a300aa069bbdb" }
+
+###
+
+POST http://localhost:3001/api/login/
+Content-Type: application/json
+
+{
+  "username":"ihaok",
+  "password":"homerpoika"
+}
+
+###
+PUT http://localhost:3001/api/blogs/5f7d7e3003c23829cc900c83
+Content-Type: application/json
+
+{"title":"bruh","author":"mutootko","url":"kattonu","likes":31,"user":"5f7d6a5597497e206c0a67a2","id":"5f7d7e3003c23829cc900c83"}
+
+###
+POST http://localhost:3001/api/testing/reset
