@@ -5,17 +5,17 @@ import Loginform from './components/loginform'
 import LogOutButton from './components/logOutButton'
 import BlogForm from './components/createBlog'
 import Notification from './components/Notification'
-import {useDispatch} from 'react-redux'
-import {reduxError, reduxSuccess} from './reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
+import { Init } from './reducers/blogReducer'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
-  }, [])
+  
+  useEffect(()=> {
+    dispatch(Init())
+  },[dispatch])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('LoggedBlogAppUser')
@@ -25,16 +25,12 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-  const handleClick = (event) => {
-	  event.preventDefault()
-	  dispatch(reduxSuccess('velikeissi'))
-  }
 
   if (user === null) {
     return (
       <div>
         <h1>Login to application</h1>
-        <Notification.Notification />
+        <Notification />
         <Loginform setUser={setUser} />
       </div>
     )
@@ -42,14 +38,10 @@ const App = () => {
 
   return (
     <div>
+      <Notification />
       <h2>blogs</h2>
-	  <button onClick= {handleClick}>ihaok</button>
-      <Notification.Notification />
       {user.name} logged in <LogOutButton setUser={setUser} />
-      <BlogForm
-        blogs={blogs}
-        setBlogs={setBlogs}
-      />
+      <BlogForm blogs={blogs} setBlogs={setBlogs} />
       <Blogs blogs={blogs} user={user} setBlogs={setBlogs} />
     </div>
   )

@@ -1,29 +1,3 @@
-export const reduxError = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'ERROR',
-      data: data,
-    })
-  }
-}
-
-export const reduxSuccess = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'SUCCESS',
-      data: data,
-    })
-  }
-}
-
-export const reduxReset = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'RESET',
-    })
-  }
-}
-
 const notificationReducer = (state = '', action) => {
   switch (action.type) {
     case 'ERROR':
@@ -34,6 +8,44 @@ const notificationReducer = (state = '', action) => {
       return ''
     default:
       return state
+  }
+}
+
+let timeoutId
+
+export const reduxError = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'ERROR',
+      data: data,
+    })
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    timeoutId = setTimeout(() => {
+      dispatch({
+        type: 'RESET',
+      })
+    }, 5000)
+  }
+}
+
+export const reduxSuccess = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'SUCCESS',
+      data: data,
+    })
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    timeoutId = setTimeout(() => {
+      dispatch({
+        type: 'RESET',
+      })
+    }, 5000)
   }
 }
 
