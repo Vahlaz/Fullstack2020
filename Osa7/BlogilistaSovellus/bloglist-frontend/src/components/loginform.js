@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import loginService from '../services/loginService'
-import blogService from '../services/blogs'
 import { useDispatch } from 'react-redux'
 import { reduxError } from '../reducers/notificationReducer'
+import { userLogin } from '../reducers/userReducer'
 
 const Loginform = ({ setUser, setError }) => {
   const [username, setUsername] = useState([])
@@ -14,26 +13,12 @@ const Loginform = ({ setUser, setError }) => {
     event.preventDefault()
     console.log('trying to log in with', username, 'and ', password)
     try {
-      const user = await loginService.login({
-        username,
-        password,
-      })
-      if (user) {
-        window.localStorage.setItem('LoggedBlogAppUser', JSON.stringify(user))
-        blogService.setToken(user.token)
-        setUsername('')
-        setPassword('')
-        setUser(user)
-      } else {
-        setUsername('')
-        setPassword('')
-      }
+      dispatch(userLogin({ username, password }))
+      setUsername('')
+      setPassword('')
     } catch (e) {
       console.log('bruh')
       dispatch(reduxError('Error in login'))
-      setTimeout(() => {
-        setError(null)
-      }, 5000)
       setUsername('')
       setPassword('')
     }

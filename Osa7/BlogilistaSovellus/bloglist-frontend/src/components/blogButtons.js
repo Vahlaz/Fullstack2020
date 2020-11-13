@@ -1,9 +1,12 @@
 import React from 'react'
 import { Like, Remove } from '../reducers/blogReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector  } from 'react-redux'
 
-const RemoveButton = ({ user, blog }) => {
+
+const RemoveButton = ({ blog }) => {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+  
   const handleClick = async (event) => {
     event.preventDefault()
     if (window.confirm('Do you want to remove this blog?')) {
@@ -18,7 +21,7 @@ const RemoveButton = ({ user, blog }) => {
   }
 }
 
-const LikeButton = ({ blog, blogs, setBlogs, bruh }) => {
+const LikeButton = ({ blog, blogs, bruh }) => {
   const dispatch = useDispatch()
 
   let blogObject = {

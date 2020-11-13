@@ -20,7 +20,6 @@ const Blogs = ({ user, setBlogs }) => {
           <SingleBlog
             blog={blog}
             blogs={blogs}
-            user={user}
             setBlogs={setBlogs}
           />
         </div>
