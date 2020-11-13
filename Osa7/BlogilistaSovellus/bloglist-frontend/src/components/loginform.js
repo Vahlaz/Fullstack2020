@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { reduxError } from '../reducers/notificationReducer'
 import { userLogin } from '../reducers/userReducer'
 
-const Loginform = ({ setUser, setError }) => {
+const Loginform = () => {
   const [username, setUsername] = useState([])
   const [password, setPassword] = useState([])
 

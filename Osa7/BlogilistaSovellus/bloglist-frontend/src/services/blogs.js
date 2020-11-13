@@ -37,4 +37,9 @@ const edit = async (blog) => {
   return response
 }
 
-export default { getAll, setToken, token, create, remove, edit }
+const getUsers = async () => {
+  const response = await axios.get('/api/users')
+  return response.data
+}
+
+export default { getAll, setToken, token, create, remove, edit, getUsers }
