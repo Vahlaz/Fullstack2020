@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { reduxError } from '../reducers/notificationReducer'
 import { userLogin } from '../reducers/userReducer'
-
+import { Button, Container, Form } from 'react-bootstrap'
 const Loginform = () => {
   const [username, setUsername] = useState([])
   const [password, setPassword] = useState([])
@@ -25,33 +25,30 @@ const Loginform = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={loginHandler}>
-        <div>
-          username
-          <input
+    <Container>
+      <h1>Login to Application</h1>
+      <div>
+        <Form onSubmit={loginHandler}>
+          <Form.Label>Username: </Form.Label>
+          <Form.Control
             id='username'
             type='text'
             value={username}
             name='Username'
             onChange={({ target }) => setUsername(target.value)}
           />
-        </div>
-        <div>
-          password
-          <input
+          <Form.Label></Form.Label>
+          <Form.Control
             id='password'
             type='password'
             value={password}
             name='Password'
             onChange={({ target }) => setPassword(target.value)}
           />
-        </div>
-        <button id='login-button' type='submit'>
-          login
-        </button>
-      </form>
-    </div>
+          <Button type='submit'>Login</Button>
+        </Form>
+      </div>
+    </Container>
   )
 }
 

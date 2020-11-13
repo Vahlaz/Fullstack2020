@@ -2,6 +2,7 @@ import React from 'react'
 import Button from './blogButtons'
 import { useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
+import CommetForm from './CommentForm'
 
 const SingleBlog = () => {
   const blogs = useSelector((state) => state.blogs)
@@ -26,9 +27,13 @@ const SingleBlog = () => {
               </div>
               added by {blogById.user.name}
             </div>
+            <Button.RemoveButton blog={blogById} />
             <div>
               <h3>comments</h3>
-              {blogById.comments.map(comment => ( <li key = {comment.id}>{comment.content}</li>))}
+              {blogById.comments.map((comment) => (
+                <li key={comment.id}>{comment.content}</li>
+              ))}
+              <CommetForm id={blogById.id} />
             </div>
           </div>
         </>

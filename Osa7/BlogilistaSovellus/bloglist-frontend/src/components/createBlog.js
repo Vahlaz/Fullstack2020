@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import {  reduxSuccess } from '../reducers/notificationReducer'
+import { reduxSuccess } from '../reducers/notificationReducer'
 import { createblog } from '../reducers/blogReducer'
+import { Button, Collapse, Form } from 'react-bootstrap'
 
 const NewBlogForm = ({ test }) => {
   const [author, setAuthor] = useState('')
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
-  const [formVisible, setFormVisible] = useState(false)
-
-  const hideWhenVisible = { display: formVisible ? 'none' : '' }
-  const showWhenVisible = { display: formVisible ? '' : 'none' }
+  const [open, setOpen] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -30,57 +28,61 @@ const NewBlogForm = ({ test }) => {
       setUrl('')
 
       dispatch(reduxSuccess(`created new blog ${newBlogObject.title}`))
-
-      setFormVisible(false)
+      setOpen(!open)
     }
   }
 
   return (
     <div>
-      <h2>create new</h2>
-      <div style={showWhenVisible}>
-        <form onSubmit={createHandler} className='blogForm'>
-          <div>
-            title:
-            <input
-              id='title'
-              type='text'
-              value={title}
-              name='Title'
-              onChange={({ target }) => setTitle(target.value)}
-            />
-          </div>
-          <div>
-            author:
-            <input
-              id='author'
-              type='text'
-              value={author}
-              name='Author'
-              onChange={({ target }) => setAuthor(target.value)}
-            />
-          </div>
-          <div>
-            url:
-            <input
-              id='url'
-              type='text'
-              value={url}
-              name='Url'
-              onChange={({ target }) => setUrl(target.value)}
-            />
-          </div>
-          <button type='submit' id='submit-button'>
-            post
-          </button>
-        </form>
-        <button onClick={() => setFormVisible(false)}>cancel</button>
-      </div>
-      <div style={hideWhenVisible}>
-        <button onClick={() => setFormVisible(true)} id='Add-button'>
-          Add new blog
-        </button>
-      </div>
+      <Button
+        onClick={() => setOpen(!open)}
+        aria-controls='blog-form'
+        aria-expanded={open}
+        variant='success'
+        size='sm'
+      >
+        Add new blog
+      </Button>
+      <Collapse in={open}>
+        <div id='blog-form'>
+          <Form onSubmit={createHandler}>
+            <Form.Group>
+              <Form.Label>Title: </Form.Label>
+              <Form.Control
+                id='title'
+                type='text'
+                value={title}
+                name='Title'
+                onChange={({ target }) => setTitle(target.value)}
+              />
+              <Form.Label>Author: </Form.Label>
+              <Form.Control
+                id='author'
+                type='text'
+                value={author}
+                name='Author'
+                onChange={({ target }) => setAuthor(target.value)}
+              />
+              <Form.Label>Url: </Form.Label>
+              <Form.Control
+                id='url'
+                type='text'
+                value={url}
+                name='Url'
+                onChange={({ target }) => setUrl(target.value)}
+              />
+              <Button
+                variant='success'
+                size='sm'
+                type='submit'
+                id='submit-button'
+              >
+                post
+              </Button>
+            </Form.Group>
+          </Form>
+        </div>
+      </Collapse>
     </div>
   )
 }

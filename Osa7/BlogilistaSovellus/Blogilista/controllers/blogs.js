@@ -94,6 +94,7 @@ blogsRouter.post('/blogs/:id/comment', async (request, response) => {
   const data = request.body
   const id = request.params.id
   const blog = await Blog.findById(id)
+  console.log(data)
   blog.comments.push({content: data.content, id: blog.comments.length +1 })
 
   await blog.save()

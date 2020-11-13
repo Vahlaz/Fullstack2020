@@ -35,10 +35,9 @@ const App = () => {
 
   const user = useSelector((state) => state.user)
 
-  if (user === null) {
+  if (!user || user === null) {
     return (
       <div>
-        <h1>Login to application</h1>
         <Notification />
         <Loginform />
       </div>
@@ -46,16 +45,14 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
       <NavBar />
       <Notification />
-      <h2>blogs</h2>
       <Switch>
         <Route path='/users/:id'>
           {' '}
           <SingleUser users={users} />
         </Route>
-
         <Route path='/users'>
           <AllUsers users={users} />
         </Route>
@@ -64,6 +61,7 @@ const App = () => {
         </Route>
         <Route path='/'>
           <BlogForm />
+          <h2>All Blogs</h2>
           <Blogs />
         </Route>
       </Switch>

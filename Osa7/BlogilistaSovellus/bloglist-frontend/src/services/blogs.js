@@ -42,4 +42,12 @@ const getUsers = async () => {
   return response.data
 }
 
-export default { getAll, setToken, token, create, remove, edit, getUsers }
+const createComment = async (data, id) => {
+  const comment = {content: data}
+  console.log(data)
+  console.log(id)
+  const response = await axios.post(`/api/blogs/${id}/comment`, comment)
+  return response
+}
+
+export default { getAll, setToken, token, create, remove, edit, getUsers, createComment }

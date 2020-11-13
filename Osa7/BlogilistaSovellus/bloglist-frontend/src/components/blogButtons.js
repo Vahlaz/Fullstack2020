@@ -1,21 +1,33 @@
 import React from 'react'
 import { Like, Remove } from '../reducers/blogReducer'
-import { useDispatch, useSelector  } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { reduxSuccess } from '../reducers/notificationReducer'
 
 const RemoveButton = ({ blog }) => {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-  
+  const history = useHistory()
+  const user = useSelector((state) => state.user)
+
   const handleClick = async (event) => {
     event.preventDefault()
     if (window.confirm('Do you want to remove this blog?')) {
       dispatch(Remove(blog))
+      dispatch(reduxSuccess('blog removed successfully'))
+      history.push('/')
     }
   }
-
+  if (!user) {
+    return null
+  }
+  console.log(blog)
   if (user.username === blog.user.username) {
-    return <button onClick={handleClick}>remove</button>
+    return (
+      <Button variant='danger' size='sm' onClick={handleClick}>
+        remove
+      </Button>
+    )
   } else {
     return null
   }
@@ -45,9 +57,9 @@ const LikeButton = ({ blog, blogs, bruh }) => {
     }
   }
   return (
-    <button onClick={handleClick} id='like-button'>
+    <Button variant='success' size='sm' onClick={handleClick} id='like-button'>
       like
-    </button>
+    </Button>
   )
 }
 
