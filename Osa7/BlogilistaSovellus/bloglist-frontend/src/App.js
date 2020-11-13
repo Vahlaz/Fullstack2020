@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import blogService from './services/blogs'
 import Blogs from './components/Blog'
 import Loginform from './components/loginform'
-import LogOutButton from './components/logOutButton'
 import BlogForm from './components/createBlog'
 import Notification from './components/Notification'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +11,7 @@ import { Switch, Route } from 'react-router-dom'
 import AllUsers from './components/AllUsers'
 import NavBar from './components/NavBar'
 import SingleUser from './components/SingleUser'
+import SingleBlog from './components/SingleBlog'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -50,7 +50,6 @@ const App = () => {
       <NavBar />
       <Notification />
       <h2>blogs</h2>
-      {user.name} logged in <LogOutButton />
       <Switch>
         <Route path='/users/:id'>
           {' '}
@@ -60,7 +59,9 @@ const App = () => {
         <Route path='/users'>
           <AllUsers users={users} />
         </Route>
-
+        <Route path='/blog/:id'>
+          <SingleBlog />
+        </Route>
         <Route path='/'>
           <BlogForm />
           <Blogs />

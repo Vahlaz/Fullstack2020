@@ -1,6 +1,6 @@
 import React from 'react'
-import SingleBlog from './SingleBlog'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Blogs = ({ setBlogs }) => {
   const blogs = useSelector((state) => state.blogs)
@@ -16,12 +16,9 @@ const Blogs = ({ setBlogs }) => {
     <div>
       {blogs.map((blog) => (
         <div style={blogStyle} key={blog.id}>
-          {' '}
-          <SingleBlog
-            blog={blog}
-            blogs={blogs}
-            setBlogs={setBlogs}
-          />
+          <Link to={`/blog/${blog.id}`}>
+            {blog.title} {blog.author}
+          </Link>
         </div>
       ))}
     </div>

@@ -1,13 +1,19 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import LogOutButton from './logOutButton'
 const NavBar = () => {
-    return(
-        <div>
-            <Link to='/'>home</Link>{'  '} 
-            <Link to='/users'>users</Link>
-        </div>
-    )
+  const user = useSelector((state) => state.user)
+
+  return (
+    <div >
+      <Link to='/'>home </Link>
+      {'  '}
+      <Link to='/users'>users </Link> 
+      {user.name} {user.username}  
+      <LogOutButton /> 
+    </div>
+  )
 }
 
 export default NavBar
