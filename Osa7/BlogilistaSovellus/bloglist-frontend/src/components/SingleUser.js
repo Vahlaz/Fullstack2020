@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
-import {Table} from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 const SingleUser = ({ users }) => {
   const match = useRouteMatch('/users/:id')
   if (users) {
@@ -15,12 +15,12 @@ const SingleUser = ({ users }) => {
             </tr>
           </thead>
           <tbody>
-        {userById.blogs.map((blog) => (
-          <tr key={blog.id}>
-            <Link to={`/blog/${blog.id}`}>{blog.title} </Link>{' '}
-          </tr>
-        ))}
-        </tbody>
+            {userById.blogs.map((blog) => (
+              <tr key={blog.id}>
+                <Link to={`/blog/${blog.id}`}>{blog.title} </Link>{' '}
+              </tr>
+            ))}
+          </tbody>
         </Table>
       </>
     )
