@@ -1,23 +1,26 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
-import {ALL_AUTHORS} from './queries'
+import { useQuery, useMutation } from '@apollo/client'
+import { ALL_AUTHORS, EDIT_AUTHOR } from './queries'
+
 const Authors = (props) => {
-
-
   const result = useQuery(ALL_AUTHORS)
-
-  console.log(result)
-
+  const [editAuthor] = useMutation(EDIT_AUTHOR, {
+    refetchQueries: [{ query: ALL_AUTHORS }],
+  })
+  const submit = (event) => {
+    event.preventDefault()
+    const name = event.target.ihaok.value
+    const year = parseInt(event.target.year.value)
+    console.log(name, year)
+    editAuthor({ variables: { name, year } })
+  }
+  
   if (!props.show) {
     return null
   }
 
-  if(result.loading){
-    return(
-      <div>
-        loading...
-      </div>
-    )
+  if (result.loading) {
+    return <div>loading...</div>
   }
 
   return (
@@ -39,6 +42,20 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
+      <h2>Edit birthyear</h2>
+      <form onSubmit={submit}>
+        author:{' '}
+        <select id='ihaok'>
+          {result.data.allAuthors.map((a) => (
+            <option value={a.name} key={a.id}>
+              {a.name}
+            </option>
+          ))}
+        </select>
+        <br />
+        birthyear: <input id='year' /> <br />
+        <button type='submit'>update author</button>
+      </form>
     </div>
   )
 }
