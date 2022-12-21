@@ -1,13 +1,15 @@
 import express from 'express';
+import patientService from '../services/patientService';
 
 const router = express.Router();
+router.use(express.json())
 
 router.get('/', (_req, res) => {
-  res.send('Fetching all diaries!');
+  res.send(patientService.getEntries());
 });
 
 router.post('/', (_req, res) => {
-  res.send('Saving a diary!');
+  res.send('saving diagnose');
 });
 
 export default router;
